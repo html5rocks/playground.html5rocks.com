@@ -1,0 +1,344 @@
+html, body {
+  font-family: arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.new {
+  color:red;
+  font-size:10px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+button {
+  cursor: pointer;
+
+  font-weight: bold;
+  color: #427bd6;
+  font-size: 14px;
+  padding: 2px 4px;
+
+  border: 1px solid #ccc;
+  background: #f5f8fd url(../images/button-bg.png) repeat-x scroll 0 0;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+button:hover {
+  border: 1px solid #427bd6;
+}
+
+button:active {
+  background-position: 0 -40px;
+}
+
+button:active span {
+  position: relative;
+  left: 1px;
+  top: 1px;
+}
+
+button.negative {
+  color: #d64242;
+  border: 1px solid #ef9090;
+  background: #fbefef url(../images/button-bg-negative.png) repeat-x scroll 0 0;
+}
+
+button.negative:hover {
+  border: 1px solid #d64242;
+}
+
+#container {
+  width: 100%;
+  margin:0 auto;
+}
+
+h1 {
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: bold;
+  margin: 5px 0 15px 0;
+  font-size: 28px;
+}
+
+.pane-row {
+  position: relative;
+  margin: 8px auto 0;
+}
+
+.pane {
+  position: relative;
+  padding: 4px;
+  background: rgba(255, 0, 0, 0.05);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.pane-header {
+  position: relative;
+  margin: 0;
+  padding: 4px;
+  padding-bottom: 8px;
+}
+
+.pane-header h2 {
+  color: rgba(160, 0, 0, 0.6);
+  font-size: 14px;
+  font-family: arial, sans-serif;
+  font-weight: bold;
+}
+
+.pane-buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.pane-buttons button:hover,
+.pane-buttons button:active {
+  opacity: 1.0;
+}
+
+.icon-text {
+  padding-left: 22px;
+  background: transparent url(../images/button-icons.png) no-repeat scroll 0px -8px;
+}
+
+.icon-only {
+  padding-left: 12px;
+  background: transparent url(../images/button-icons.png) no-repeat scroll 0px -8px;
+}
+
+.docs-icon { background-position: 0px -8px; }
+.html-icon { background-position: 0px -40px; }
+.save-icon { background-position: 0px -72px; }
+.export-icon { background-position: 0px -104px; }
+.run-icon { background-position: 0px -136px; }
+.dropdown-icon { background-position: 0px -168px; }
+.firebug-icon { background-position: 0px -200px; }
+.debug-icon { background-position: 0px -232px; }
+.cancel-icon { background-position: 0px -264px; }
+
+.pane-content {
+  background-color: #fff;
+}
+
+#codeRow {
+  padding-left: 0;
+}
+
+#search {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  
+  padding: 3px 6px;
+  font-size: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#search.placeholder {
+  color: #ccc;
+}
+
+#code {
+  width: 70%;
+  display: inline;
+}
+
+#codeContainer #demoTitle {
+  position: absolute;
+  left: 10em;
+  top: 4px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  -o-text-overflow : ellipsis;
+  white-space: nowrap;
+  color: #cee1ff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+#edit, #selectCode {
+  position: relative;
+  height: 320px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.CodeMirror-line-numbers {
+  width: 2.2em;
+  background-color: #eee;
+  color: #aaa;
+  text-align: right;
+  padding-right: .3em;
+  font-size: 10pt;
+  font-family: monospace;
+  padding-top: 0;
+  margin-right: 0.3em;
+}
+
+.line-number {
+  cursor: pointer;
+}
+
+.breakpoint {
+  margin-right: 2px;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+
+iframe {
+  font-family: arial, sans-serif;
+}
+
+#runFrame {
+  font-family: arial, sans-serif;
+}
+
+.allowDebugCode {
+  cursor: pointer;
+  opacity: 1.0;
+}
+
+.disallowDebugCode {
+  opacity: 0.45;
+  cursor: default;
+}
+
+a:link {
+  color: #427bd6;
+}
+
+li.selected {
+  background-color:#E5ECF9;
+  color:#000000;
+  position:relative;
+  text-decoration:none;
+  z-index:2;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin:0;
+  vertical-align:middle;
+  cursor: default;
+}
+
+li {
+  padding-left: 15px;
+  color: blue;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+#runbox {
+  width: 100%;
+}
+
+#runbox iframe {
+  border: 0 none white;
+  width: 100%;
+  height: 100%;
+}
+
+.pane-row-sizer + .pane-row {
+  margin-top: 0;
+}
+
+.pane-row-sizer {
+  cursor: ns-resize;
+  background: transparent url(../images/pane-vert-sizer.png) no-repeat scroll 50% 50%;
+  height: 16px;
+}
+
+/* ------ Fix jQuery 'no drag over iFrame' CSS rules */
+
+#dragsafe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* ------ Forms and dialogs */
+
+.dialog {
+  background-color: #fff;
+  padding: 16px;
+  border: 4px solid #427bd6;
+  
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.dialog h2 {
+  color: #427bd6;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+#grayOverlay {
+  border-width: 0pt;
+  margin: 0pt;
+  padding: 0pt;
+  background-color: #fff;
+  position: absolute;
+  top: 0pt;
+  left: 0pt;
+  opacity: 0.8;
+  z-index: 1001;
+  filter: alpha(opacity = 80);
+}
+
+form table td {
+  padding-bottom: 8px;
+}
+
+.formLabel {
+  font-size: 12px;
+}
+
+.explain {
+  padding-top: 4px;
+  color: #888;
+  font-size: 11px;
+}
+
+.dialog-buttons {
+  text-align: right;
+  padding-top: 5px;
+}
+
+/* editor buttons (ernestd) */
+button.button-on, button.button-on:hover { background-image: none; background-color: #EEDC82; }
+#colorMenuButton { }
+
+.inlineEl { display: inline; }
+.hidden { display: none; }
+
+#xbrowser_link {
+  font: 75% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+  background-color: InfoBackground;
+  border: 1px solid yellow;
+  text-align: center;
+  padding: 10px;
+}

@@ -1,0 +1,16 @@
+.rotate-45 { -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg);  }
+.rotate75  { -webkit-transform: rotate(75deg); -moz-transform: rotate(75deg); -o-transform: rotate(75deg);  }
+.rotate90  { -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -o-transform: rotate(90deg);  }
+
+.rotate90plus { -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); 
+                -webkit-transform-origin: 50%; -moz-transform-origin: 50%; -o-transform-origin: 50%;  }
+
+.scale02  { -webkit-transform: scale(0.2); -moz-transform: scale(0.2); -o-transform: scale(0.2);  }
+.scaleX2  { -webkit-transform: scaleX(2); -moz-transform: scaleX(2); -o-transform: scaleX(2);  }
+.scaleY15 { -webkit-transform: scaleY(1.5); -moz-transform: scaleY(1.5); -o-transform: scaleY(1.5);  }
+
+.skewX10 { -webkit-transform: skewX(10deg); -moz-transform: skewX(10deg); -o-transform: skewX(10deg);  }
+.skewX30 { -webkit-transform: skewX(30deg); -moz-transform: skewX(30deg); -o-transform: skewX(30deg);  }
+.skewY20 { -webkit-transform: skewY(20deg); -moz-transform: skewY(20deg); -o-transform: skewY(20deg);  }
+
+li { display: table-cell; font-size: 9px; width: 80px; font-family: Verdana; padding: 10px; }

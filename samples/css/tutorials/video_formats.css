@@ -1,0 +1,14 @@
+video {
+  width: 200px;
+  height: 112px;
+  border: 1px solid black;
+}
+
+.video-container {
+  display: inline-block;
+  text-align: center;
+}
+
+p {
+  font: 14px Arial;
+}

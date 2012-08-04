@@ -1,0 +1,16 @@
+#ellipsis {
+  font-size: 18px;
+  border: 1px solid black;
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#clip {
+  font-size: 18px;
+  border: 1px solid black;
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+}

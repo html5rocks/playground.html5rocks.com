@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Droid Sans'), url('http://playground.html5rocks.com/samples/html5_misc/Droid_Sans.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Molengo';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Molengo'), url('http://playground.html5rocks.com/samples/html5_misc/Molengo.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Vollkorn'), url('http://playground.html5rocks.com/samples/html5_misc/Vollkorn.ttf') format('truetype');
+}
+
+p#title1 {
+  font: 300% "Droid Sans", Verdana, sans-serif;
+}
+p#title2 {
+  font: 300% "Molengo", Verdana, sans-serif;
+}
+p#title3 {
+  font: 300% "Vollkorn", Verdana, sans-serif;
+}

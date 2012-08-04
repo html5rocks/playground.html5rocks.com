@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"> 
+<script type="text/javascript" src="http://playground.html5rocks.com/samples/html5_misc/webgl/sylvester.js"></script>
+<script type="text/javascript" src="http://playground.html5rocks.com/samples/html5_misc/webgl/glUtils.js"></script>
+<script type="text/javascript" src="http://playground.html5rocks.com/samples/html5_misc/webgl/helper.js"></script>
+<script id="shader-fs" type="x-shader/x-fragment"> 
+  #ifdef GL_ES
+  precision highp float;
+  #endif
+  
+  varying vec2 vTextureCoord; 
+  uniform sampler2D uSampler;
+ 
+  void main(void) {
+    gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, 1.0 - vTextureCoord.t));
+  }
+</script> 
+ 
+<script id="shader-vs" type="x-shader/x-vertex">
+  #ifdef GL_ES
+  precision highp float;
+  #endif
+  
+  attribute vec3 aVertexPosition;
+  attribute vec2 aTextureCoord;
+ 
+  uniform mat4 uMVMatrix;
+  uniform mat4 uPMatrix;
+ 
+  varying vec2 vTextureCoord;
+ 
+ 
+  void main(void) {
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+    vTextureCoord = aTextureCoord;
+  }
+</script></head> 
+<body onload="webGLStart();" style="font: 75% Lucida Grande, Trebuchet MS"> 
+  <!-- modified from http://learningwebgl.com/blog/?p=571 -->
+  <canvas id="lesson06-canvas" style="border: none;" width="500" height="500"></canvas> 
+  <h2>Controls:</h2> 
+  <ul> 
+    <li><code>Page Up</code>/<code>Page Down</code> to zoom out/in</li>
+    <li>Cursor keys: make the cube rotate (the longer you hold down a cursor key, the more it accelerates)</li>
+  </ul> 
+  <p id="log" style="color: gray"></p>
+  <script>
+    INSERT_JAVASCRIPT_HERE
+  </script>
+</body> 
+ 
+</html>

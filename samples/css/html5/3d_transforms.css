@@ -1,0 +1,11 @@
+div {
+  /* replace webkit by moz if you are trying in firefox */
+  width: 500px;
+  /* this will make the text look as if we are seeing it from the top */
+  -webkit-transform: rotate3d(1.2, 0.9, 1, 90deg);
+  /* combine it with -webkit-transitions to animate between states */
+  -webkit-transition: -webkit-transform 2s ease-in-out;
+}
+div:hover {
+  -webkit-transform: rotateZ(0);
+}

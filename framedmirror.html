@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!-- copyright (c) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Original Playground: Ben Lisbakken
+ * HTML5 Playground version: Ernest Delgado
+-->
+<head>
+  <meta charset="utf-8" />
+  <title>HTML5 Playground</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/yui-reset.css" type="text/css">
+  <link rel="stylesheet" href="css/style-framed.css" type="text/css">
+
+  <!-- JavaScript -->
+  <script src="codemirror/js/prod_codemirrorz_237dc27be9961d049c38dd9ba4c126c3.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jquery-ui-packed.js" type="text/javascript" charset="utf-8"></script>
+
+  {% for i in sample_srcs %}
+    <script src="{{ i }}"></script>
+  {% endfor %}
+  <!--
+    Undesirable to put inline script in between script includes
+    but this is the best way to load saved examples
+  -->
+
+  <script src="js/interactive_logic.js"></script>
+  <script>
+    function init() {
+      is.initForFramed(document.getElementById('editor'){% if height_of_lower %}, '{{height_of_lower}}'{% endif %});
+    }
+
+    window.addEventListener('load', function() {
+      init();
+    }, false);
+  </script>
+  <style type="text/css" media="screen">
+    #edit {
+      height: {% if height_of_upper %}{{ height_of_upper }}px{% else %}200px{% endif %};
+    }
+  </style>
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-15028909-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+</head>
+<body>
+<div id="container">
+  <div class="pane-row" id="codeRow">
+    <div class="pane" id="codeContainer">
+      <div class="pane-header" title="Change the code below and click the &#34;Run Code&#34; button to see the result!">
+        <h2>Sample Code</h2>
+        <div class="pane-buttons">
+          <button id="js-button" class="editor-button" onclick="is.toggleEditor('js');" title="Toggle between Javascript, CSS and HTML editing.">
+            <span>JavaScript</span>
+          </button>
+          <button id="css-button" class="editor-button" onclick="is.toggleEditor('css');" title="Toggle between Javascript, CSS and HTML editing.">
+            <span>CSS</span>
+          </button>
+          <button id="mixed-button" class="editor-button" style="margin-right: 4px" onclick="is.toggleEditor('mixed');" title="Toggle between Javascript, CSS and HTML editing.">
+            <span class="html-icon icon-text">HTML File</span>
+          </button>
+        </div>
+      </div>
+      <div class="pane-content">
+        <div id="edit" class="pane-row-heighter">
+          <span id="editJS"></span>
+          <span id="editCSS"></span>
+          <span id="editMixed"></span>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+  <div class="pane-row-sizer"></div>
+
+  <div class="pane-row" id="outputRow">
+    <div class="pane" id="outputContainer">
+      <div class="pane-header" title="Change the code above and click the &#34;Run Code&#34; button to see the result!">
+        <h2>Output</h2>
+        <div class="pane-buttons">
+          <button onClick="runDemoCode();" title="Run this sample.">
+            <span class="run-icon icon-text">Run Code</span>
+          </button>
+        </div>
+      </div>
+      <div class="pane-content">
+        <div id="runbox"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pane-row-sizer"></div>
+</div>
+
+<div id="HTMLforInlineJavascript" style="display:none;">&nbsp;</div>
+
+<!--
+There's a bug in jQuery UI where if you drag over an iFrame
+then you can't drag anymore.  Putting an invisible div over the
+iFrame fixes it.
+-->
+<div id="dragsafe"></div>
+<div id="grayOverlay"></div>
+
+<!--[if lt IE 9]>
+<script 
+  src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">
+</script>
+<script>CFInstall.check({ mode: "overlay" });</script>
+<![endif]-->
+
+<script>
+  function runDemoCode() {
+    var referrer = document.referrer;
+    var parentHost;
+    if (referrer) {
+      parentHost = referrer.split('/')[2];
+      if (parentHost) {
+        parentHost = parentHost.split(':')[0];
+        var matchResult = parentHost.match(/^(.*)\.html5rocks\.com$/i);
+        if (matchResult && matchResult.length > 1) {
+          parentHost = matchResult[1];
+        }
+      } else {
+        parentHost = referrer;
+      }
+    } else  {
+      parentHost = 'null';
+    }
+    console.log(['_trackEvent', 'button', 'click', 'in_' + parentHost]);
+    _gaq.push(['_trackEvent', 'button', 'click', 'in_' + parentHost]);
+
+    is.runBox.runCode();
+  }
+
+  var options = {};
+  if (!location.host.match(/localhost/) && !location.href.match(/\/\/172/)) {
+    options.defaultSample = true;
+  }
+  var mixedEditor = new CodeMirror(document.getElementById('editMixed'), {
+    parserfile: ["prod_mixed_5ca7530f0218ca2f6b1bfc8ffc1bbbf0.js"],
+    stylesheet: ["codemirror/css/xmlcolors_on_white.css", "codemirror/css/jscolors_on_white.css", "codemirror/css/csscolors_on_white.css"],
+    autoMatchParens : true,
+    path : 'codemirror/js/',
+    height : {% if height_of_upper %} '{{ height_of_upper }}px' {% else %} '200px' {% endif %},
+    eid: 'mixed',
+    content: '',
+    textWrapping: false,
+    lineNumbers: true,
+    breakPoints: false,
+    onLoad: function() {}
+  });
+  var jsEditor = new CodeMirror(document.getElementById('editJS'), {
+    parserfile: ["prod_js_only_8cbac90cb8e8e9b015f995a7ff89cab1.js"],
+    stylesheet: 'codemirror/css/jscolors_on_white.css',
+    autoMatchParens : true,
+    path : 'codemirror/js/',
+    height : {% if height_of_upper %} '{{ height_of_upper }}px' {% else %} '200px' {% endif %},
+    eid: 'js',
+    content: '',
+    textWrapping: false,
+    lineNumbers: true,
+    breakPoints: true,
+    onLoad: function() {}
+  });
+  var cssEditor = new CodeMirror(document.getElementById('editCSS'), {
+    parserfile: ["parsecss.js"],
+    stylesheet: 'codemirror/css/csscolors_on_white.css',
+    autoMatchParens : true,
+    path : 'codemirror/js/',
+    height : {% if height_of_upper %} '{{ height_of_upper }}px' {% else %} '200px' {% endif %},
+    eid: 'css',
+    content: '',
+    textWrapping: false,
+    lineNumbers: true,
+    breakPoints: true,
+    onLoad: function() {}
+  });
+</script>
+</body>
+</html>

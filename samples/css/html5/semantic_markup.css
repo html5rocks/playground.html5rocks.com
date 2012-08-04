@@ -1,0 +1,10 @@
+body { margin: 0 auto; width: 600px; } 
+section { display: block; }
+section#articles { width: 440px; float: left; padding: 10px; background-color: #fbf0cc; }
+article > header { text-decoration: underline; margin-bottom: 10px; }
+aside { float: left; width: 100px; padding: 10px; }
+footer { overflow: hidden; clear: both; text-align: center; padding: 20px; }
+nav li { float: left; width: 100px; text-align:center; padding: 10px; color: #fff; }
+nav ul { list-style: none; overflow: hidden; padding: 0; margin: 0; background-color: #424242; }
+a { color: #65ac1c; }
+nav li a { color: #fff; }

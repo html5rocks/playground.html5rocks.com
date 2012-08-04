@@ -1,0 +1,63 @@
+.hbox {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+
+  width: 500px;
+  height: 100px;
+  background-color: wheat;
+  border: 2px solid peru;
+}
+
+.vbox {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+
+  width: 300px;
+  height: 160px;
+  background-color: palegreen;
+  border: 2px solid green;
+}
+
+.hbox > *, .vbox > * {
+  border: 1px solid black;
+  font: 16px/50px Arial;
+  text-align: center;
+}
+
+.flex_child_1 {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+}
+
+.flex_child_2 {
+  -webkit-box-flex: 2;
+  -moz-box-flex: 2;
+  box-flex: 2;
+}
+
+button {
+  margin-top: 30px;
+}
+
+p {
+  font: 20px Arial;
+}

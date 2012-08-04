@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<!-- copyright (c) 2010 Google inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Original Playground: Ben Lisbakken
+ * HTML5 Playground version: Ernest Delgado
+-->
+<head>
+  <meta charset="utf-8" />
+  <title>HTML5 Playground</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/yui-reset.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Vollkorn|Droid+Serif|Droid+Sans:regular,bold"> 
+  <!-- JavaScript -->
+  <script src="codemirror/js/prod_codemirrorz_237dc27be9961d049c38dd9ba4c126c3.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    jQuery.ajaxSetup({
+      converters: {
+        "text script": function( text ) {
+          // Must comment the line below to prevent auto-eval fetched script
+          // jQuery.globalEval( text );
+          return text;
+        }
+      }
+    });
+  </script>
+  <script src="js/jquery-ui-packed.js" type="text/javascript" charset="utf-8"></script>
+  {% for i in sample_srcs %}
+    <script src="{{ i }}"></script>
+  {% endfor %}
+  <!--
+    Undesirable to put inline script in between script includes
+    but this is the best way to load saved examples
+  -->
+  <script>
+    {% if usersSamplesJSON %}
+
+    var userJSON = {{ usersSamplesJSON }};
+    if (typeof userJSON != 'undefined' && userJSON.length) {
+      codeArray = userJSON.concat(codeArray);
+    }
+    {% endif %}
+    var curAPITypes = '{{ curAPITypes }}';
+    var expandedCategory = '{{ expandedCategory }}';
+  </script>
+  <script src="js/interactive_logic.js"></script>
+  <script>
+    var loginUrl = '{{ loginUrl }}';
+    var logoutUrl = '{{ logoutUrl }}';
+    function init() {
+      is.init(document.getElementById('editor'));
+    }
+
+    window.addEventListener('load', function() {
+      init();
+    }, false);
+  </script>
+  <style type="text/css" media="screen">
+    header, footer {
+      display: block;
+    }
+    header {
+      background-color: #fff;
+      font-size: 14px;
+      border-bottom: 2px solid #222;
+      overflow: hidden;
+      padding: 8px 20px;
+    }
+    footer {
+      padding: 20px 0;
+      font-size: 12px;
+      text-align: center;
+    }
+    h1#title {
+      cursor: pointer;
+      font-size: 55px;
+      margin: 0;
+      float: left;
+      width: 50%;
+    }
+
+    #title { 
+      font-style: normal; 
+      font-weight: bold; 
+    }
+
+    #title .normal {
+      font-family: 'Droid Sans', Arial;
+      font-style: normal;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.09em;
+      padding-right: 4px;
+    }
+
+    #title .five { 
+      color: #fff;
+      font-family: 'Droid Sans', Arial;
+      text-shadow: 1px 0px 1px #000, -1px 0px 1px #000;
+    }
+
+    #title .rocks { 
+      font-family: 'Droid Sans', Arial;
+      color: #3D5C9D;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: -0.09em;
+      margin-left: -3px;
+    }
+    
+    #section-header #title {
+      font-size: 28px;
+      width: 40%;
+    }
+
+    #section-header #title .rocks {
+      margin-left: -1px;
+    }
+
+    header nav ul {
+      padding-left: 0;
+      list-style: none;
+      float: right;
+      margin-top: 30px;
+    }
+
+    #section-header nav ul {
+      margin-top: 8px;
+    }
+
+    header nav ul li {
+      float: left;
+      padding: 0 10px;
+    }
+    header nav ul li a {
+      text-decoration: none;
+    }
+    header nav ul li a:visited {
+      color: #427BD6;
+    }
+    header nav ul li a:hover {
+      text-decoration: underline;
+    }
+    header nav ul li a.current {
+      color: #222;
+      font-weight: bold;
+    }
+    #user-info {
+      border-left: 1px solid blue;
+    }
+    #user-info li {
+      color: #222;
+    }
+    .madeby img {
+      height: 20px;
+      width: 50px;
+      margin-bottom: -7px;
+    }
+  </style>
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-15028909-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+</head>
+<body>
+<div id="container">
+  <header id="section-header"> 
+    <h1 id="title">
+      <span class="normal">HTML</span><img src="images/HTML5_Badge_64.png" alt=""><span class="rocks">Rocks</span>
+    </h1>
+    <nav>
+      <ul id="user-info">
+        <li>{% if userEmail %} {{ userEmail }} | <a href="{{ logoutUrl }}">Sign out</a> {% else %} <a href="{{ loginUrl }}">Sign in</a> {% endif %}</li>
+      </ul>
+      
+      <ul>
+        
+        <li><a data-section="slides" href="http://www.html5rocks.com/slides.html">Slides</a></li>
+        <li><a data-section="playground" class="current" href="/">Playground</a></li>
+        <li><a data-section="studio" href="http://studio.html5rocks.com">Studio</a></li>
+        <li><a data-section="tutorials" href="http://www.html5rocks.com/tutorials/">Tutorials</a></li>
+        <li><a data-section="resources" href="http://www.html5rocks.com/resources.html">Resources</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="pane-row" id="codeRow">
+    <div class="pane" id="selectCodeContainer">
+      <div class="pane-header">
+        <h2>Pick an API</h2>
+        <input type="text" placeholder="Search" id="search">
+      </div>
+      <div class="pane-content">
+        <div id="selectCode" class="pane-row-heighter"></div>
+      </div>
+    </div>
+
+    <div class="pane" id="codeContainer">
+      <div class="pane-header">
+        <h2>Edit Code</h2>
+        <div id="demoTitle"></div>
+        <div class="pane-buttons">
+          <button id="js-button" class="editor-button" onclick="is.toggleEditor('js');" title="Toggle between Javascript, CSS and HTML editing.">
+            <span>JavaScript</span>
+          </button>
+          <button id="css-button" class="editor-button" onclick="is.toggleEditor('css');" title="Toggle between Javascript, CSS and HTML editing.">
+            <span>CSS</span>
+          </button>
+          <button id="mixed-button" class="editor-button" style="margin-right: 4px" onclick="is.toggleEditor('mixed');" title="Toggle between Javascript, CSS and HTML editing.">
+            <span class="html-icon icon-text">HTML File</span>
+          </button>
+          <button id="linksMenuButton" class="dropdown" title="View the documentation for this sample.">
+            <span class="docs-icon icon-text">Related Links</span>
+          </button>
+          <button id="colorMenuButton" class="dropdown b-on-w">
+            <span>Theme</span>
+          </button>
+          <button id="fullMenuButton">
+            <span>&harr;</span>
+          </button>
+          <button id="codeMenuButton" class="dropdown">
+            <span class="dropdown-icon icon-only">&nbsp;</span>
+          </button>
+          <div class="dropdown-content color-dropdown" id="colorMenuDropdown">
+            <div onclick="is.uiEffects.switchColors('black')">Black</div>
+            <div onclick="is.uiEffects.switchColors('white')">White</div>
+          </div>
+          <div class="dropdown-content links-dropdown" id="linksMenuDropdown">
+            
+          </div>
+          <div class="dropdown-content code-dropdown" id="codeMenuDropdown">
+            <div onClick="is.uiEffects.toggleDropdown($('#codeMenuDropdown'));is.linkCode();return false;">
+              <span class="export-icon icon-text">Export</span>
+            </div>
+            {% if loginUrl %}
+            <!-- <div onClick="is.uiEffects.toggleDropdown($('#codeMenuDropdown'));is.confirmLogin('{{ loginUrl }}', true);return false;">
+              <span class="save-icon icon-text">Save</span>
+            </div> -->
+            {% else %}
+            <!-- <div onClick="is.uiEffects.toggleDropdown($('#codeMenuDropdown'));is.saveCode();return false;">
+              <span class="save-icon icon-text">Save</span>
+            </div> -->
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="pane-content">
+        <div id="edit" class="pane-row-heighter">
+          <span id="editJS"></span>
+          <span id="editCSS"></span>
+          <span id="editMixed"></span>
+        </div>
+      </div>
+    </div>    
+  </div>
+  
+  <div class="pane-row-sizer"></div>
+  
+  <div class="pane-row" id="outputRow">
+    <div class="pane" id="outputContainer">
+      <div class="pane-header">
+        <h2>Output</h2>
+        <div class="pane-buttons">
+          <button onClick="is.runBox.runCode({debugMode: true});" title="Run this sample in 'Debug Mode' which enables breakpoints and inserts Firebug Lite.">
+            <span class="debug-icon icon-text">Debug Code</span>
+          </button>
+        
+          <button onClick="is.runBox.runCode();" title="Run this sample.">
+            <span class="run-icon icon-text">Run Code</span>
+          </button>
+        </div>
+      </div>
+      <div class="pane-content">
+        <div id="runbox"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="pane-row-sizer"></div>
+  
+  <footer>
+    <a href="http://www.html5rocks.com/">Home</a> - <a href="http://www.html5rocks.com/tos.html">Terms</a> -
+    <a href="http://www.html5rocks.com/privacy.html">Privacy</a> - 
+    <a href="https://spreadsheets0.google.com/a/html5rocks.com/viewform?hl=en&formkey=dHB0ekdHa0NyTjhjQWFnUXAtM1VuY0E6MQ#gid=0" target="_blank">Feedback</a> - 
+    <a href="http://www.google.com/moderator/#15/e=2a15e&t=2a15e.42">Make a Suggestion</a> - 
+    <a href="http://code.google.com/p/html5playground/issues/list">Report Bug</a>
+    | <span class="madeby">Made by Google | <img src="http://www.html5rocks.com/static/images/google_logo_small.png"></span>
+  </footer>
+</div>
+
+<div id="HTMLforInlineJavascript" style="display:none;">&nbsp;</div>
+
+<!--
+There's a bug in jQuery UI where if you drag over an iFrame
+then you can't drag anymore.  Putting an invisible div over the
+iFrame fixes it.
+-->
+<div id="dragsafe"></div>
+
+<form action="http://savedbythegoog.appspot.com/add" id="linkCodeForm" method="POST">
+  <input type="hidden" id="codeHolder" name="code" />
+</form>
+<div id="grayOverlay"></div>
+
+<div id="saveDiv" class="dialog">
+  <h2 style="height:20px">Save Code</h2>
+  <form action="save" method="POST" id="saveForm">
+    <input type="hidden" name="boilerplateLoc" value="" id="boilerplateLoc">
+    <input name="jscode" id="jscodeSaveForm" style="display: none;" />
+    <input type="hidden" name="id" value="" id="idSaveForm">
+    <input type="hidden" name="type" value="{{curAPITypes}}">
+    <input type="hidden" name="sc" id="safetyCookie">
+    <table id="saveFormTable">
+      <tr>
+        <td style="vertical-align: top;" class="formLabel">Sample Name:</td>
+        <td>
+          <div>
+            <input type="text" id="saveSampleName" name="sampleName" value="My Sample" />
+            <div class="explain">
+              This is the display name of the sample.  It must have a unique name.
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="vertical-align: top;" class="formLabel">Tags:</td>
+        <td>
+          <div>
+            <input type="text" id="tagsSaveForm" name="tags" value="tag1, tag2, tag3" />
+            <div class="explain">
+              Tags associated with this sample.  They will be used for the search bar.
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div class="dialog-buttons">
+      <button onClick="$('#saveForm').submit();">
+        <span class="save-icon icon-text">Save</span>
+      </button>
+    
+      <button class="negative" onClick="is.uiEffects.closeDialog('saveDiv');return false;">
+        <span class="cancel-icon icon-text">Cancel</span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<!--[if lt IE 9]>
+<script 
+  src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">
+</script>
+<script>CFInstall.check({ mode: "overlay" });</script>
+<![endif]-->
+
+<script>
+  var options = {};
+  if (!location.host.match(/localhost/) && !location.href.match(/\/\/172/)) {
+    options.defaultSample = true;
+  }
+  var mixedEditor = new CodeMirror(document.getElementById('editMixed'), {
+    parserfile: ["prod_mixed_5ca7530f0218ca2f6b1bfc8ffc1bbbf0.js"],
+    stylesheet: ["codemirror/css/xmlcolors_on_white.css", "codemirror/css/jscolors_on_white.css", "codemirror/css/csscolors_on_white.css"],
+    autoMatchParens : true,
+    path : 'codemirror/js/',
+    height : '320px',
+    eid: 'mixed',
+    content: '',
+    textWrapping: false,
+    lineNumbers: true,
+    breakPoints: false,
+    onLoad: function() {}
+  });
+  var jsEditor = new CodeMirror(document.getElementById('editJS'), {
+    parserfile: ["prod_js_only_8cbac90cb8e8e9b015f995a7ff89cab1.js"],
+    stylesheet: 'codemirror/css/jscolors_on_white.css',
+    autoMatchParens : true,
+    path : 'codemirror/js/',
+    height : '320px',
+    eid: 'js',
+    content: '',
+    textWrapping: false,
+    lineNumbers: true,
+    breakPoints: true,
+    onLoad: function() {}
+  });
+  var cssEditor = new CodeMirror(document.getElementById('editCSS'), {
+    parserfile: ["parsecss.js"],
+    stylesheet: 'codemirror/css/csscolors_on_white.css',
+    autoMatchParens : true,
+    path : 'codemirror/js/',
+    height : '320px',
+    eid: 'css',
+    content: '',
+    textWrapping: false,
+    lineNumbers: true,
+    breakPoints: false,
+    onLoad: function() {}
+  });
+
+  document.querySelector('#title').addEventListener('click', function() {
+      window.location = 'http://www.html5rocks.com/';
+  }, false);
+</script>
+</body>
+</html>

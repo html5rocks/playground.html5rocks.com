@@ -1,0 +1,13 @@
+#video-column {
+  float: left;
+  width: 50%;
+  margin-top: 20px;
+}
+#reflection-button {
+  margin: 20px 0;
+}
+#track-column {
+  float: left;
+  width: 45%;
+  margin-top: 20px;
+}

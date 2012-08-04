@@ -1,0 +1,10 @@
+#shadow-example {
+  text-shadow: rgba(64, 64, 64, 0.496094) 6px 7px 5px;
+  -webkit-box-shadow: rgba(0, 0, 128, 0.246094) 8px 6px 3px;
+  -moz-box-shadow: rgba(0, 0, 128, 0.246094) 8px 6px 3px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 200px;
+  padding: 50px;
+  font-size: 35px;
+}

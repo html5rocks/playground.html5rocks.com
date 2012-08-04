@@ -1,0 +1,11 @@
+.example_desc {
+  font-family: Arial;
+  font-size: 18px;
+}
+
+.wide_spacing {
+  font-family: Arial;
+  font-size: 36px;
+  letter-spacing: 2px;
+  word-spacing: 8px;
+}

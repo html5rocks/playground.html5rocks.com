@@ -1,0 +1,12 @@
+div {
+  font-size: 30px;
+  background: -moz-linear-gradient(0% 0% 270deg,#00abeb, white, white 50%,#66cc00 51%,white 100%);
+  background: -webkit-gradient(linear, left top, left bottom,
+                       from(#00abeb), to(white),
+                       color-stop(0.5, white), color-stop(0.5, #66cc00));
+}
+
+div:hover{
+  background: -webkit-gradient(radial, 430 50, 0, 430 50, 506, from(red), to(#000));
+  background-image: -moz-radial-gradient(430px 50px 45deg, circle cover, red 0%, black 100%);
+}

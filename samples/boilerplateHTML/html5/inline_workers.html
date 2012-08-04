@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      INSERT_CSS_HERE
+    </style>
+  </head>
+
+  <body>
+    <button onclick="sayHI()">Say HI</button>
+    <button onclick="unknownCmd()">Send unknown command</button>
+    <button onclick="stop()">Stop worker</button>
+    <br />
+    <textarea id="result"></textarea>
+    <script id="worker-script" type="javascript/worker">
+      INSERT_JAVASCRIPT_HERE
+    </script>
+    <script type="text/javascript">
+      window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder;
+      window.URL = window.URL || window.webkitURL;
+
+      function sayHI() {
+        worker.postMessage({'cmd': 'start', 'msg': 'Hi'});
+      }
+
+      function stop() {
+        // Calling worker.terminate() from this script would also stop the worker.
+        worker.postMessage({'cmd': 'stop', 'msg': 'Bye'});
+      }
+
+      function unknownCmd() {
+        worker.postMessage({'cmd': 'foobard', 'msg': '???'});
+      }
+
+      var bb = new BlobBuilder();
+      bb.append(document.querySelector('[type="javascript/worker"]').textContent);
+
+      var worker = new Worker(window.URL.createObjectURL(bb.getBlob()));
+
+      worker.addEventListener('message', function(e) {
+        document.getElementById('result').textContent = e.data;
+      }, false);
+    </script>
+  </body>
+</html>

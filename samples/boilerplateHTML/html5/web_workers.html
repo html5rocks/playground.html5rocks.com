@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="http://www.google.com/jsapi?key=ABCDEFG"></script>
+  <script>google.load("maps", "2");</script>
+  <script src="samples/html5_misc/web_workers/main.js"></script>
+  <script src="samples/html5_misc/web_workers/canvas.js"></script>
+  <script src="samples/html5_misc/web_workers/ground.js"></script>
+  <script src="samples/html5_misc/web_workers/annealing.js"></script>
+  <script src="samples/html5_misc/web_workers/points.js"></script>
+  
+  </head>
+  <body style="font: 75% Lucida Grande, Trebuchet MS;margin:0">
+    <p id="log" style="position:absolute;z-index:1;
+                       left:10px;color:red;font-size:120%"></p>
+    <div id="content" style="height: 450px"></div>
+    <div id="groundContainer"></div>
+    <label for="worker">Worker<input type="checkbox" id="worker"/></label>
+    <input type="button" onclick="init()" value="go"/>
+    
+    <script>
+      INSERT_JAVASCRIPT_HERE
+    </script>
+  </body>
+</html>

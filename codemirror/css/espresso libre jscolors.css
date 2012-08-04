@@ -1,0 +1,63 @@
+.editbox {
+  margin: .4em;
+  padding: 0;
+  font-family: monospace;
+  font-size: 10pt;
+  color: black;
+  background-color: #2A211C;
+}
+
+pre.code, .editbox {
+  color: #666666;
+}
+
+.editbox p {
+  margin: 0;
+}
+
+span.js-keyword {
+  color: #000088;
+}
+
+span.js-atom {
+  color: #228811;
+}
+
+span.js-variable {
+  color: #BDAE9D;
+}
+
+span.js-variabledef {
+  color: #FF9358;
+}
+
+span.js-localvariable {
+/*  color: #004499;*/
+  color: #BDAE9D;
+}
+
+span.js-property {
+  color: #BDAE9D;
+}
+
+span.js-comment {
+  color: #880000;
+}
+
+span.js-string {
+  color: #008800;
+}
+
+
+/* Textmate Espresso Libre*/
+span.js-comment {
+  color: #0066FF;
+}
+
+span.js-keyword {
+  color: #43A8ED;
+}
+
+span.js-punctuation {
+  color: #BDAE9D;
+}

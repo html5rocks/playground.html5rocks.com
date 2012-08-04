@@ -1,0 +1,10 @@
+mkdir ../interactive_copy
+cp -R * ../interactive_copy
+find ../interactive_copy -name '*.svn' | xargs -t rm -rf
+find ./codemirror -name '*.js' | xargs -L1 -IMYFILES -t java -jar yuicompressor-2.4.1.jar MYFILES -o ../interactive_copy/MYFILES
+find ./js -name '*.js' | xargs -L1 -IMYFILES -t java -jar yuicompressor-2.4.1.jar MYFILES -o ../interactive_copy/MYFILES
+find . -name '*.css' | xargs -L1 -IMYFILES -t java -jar yuicompressor-2.4.1.jar --type css MYFILES -o ../interactive_copy/MYFILES
+find samples/js/*.js | xargs -L1 -IMYFILES -t java -jar yuicompressor-2.4.1.jar MYFILES -o ../interactive_copy/MYFILES
+md5 -q ../interactive_copy/js/interactive_logic.js | xargs -L1 -IMD5OUT -t awk '{sub(/interactive_logic.js/, "interactive_logic_MD5OUT.js")};1' ../interactive_copy/index.html > ../interactive_copy/index1.html
+mv ../interactive_copy/index1.html ../interactive_copy/index.html
+md5 -q ../interactive_copy/js/interactive_logic.js | xargs -L1 -IMD5OUT -t mv ../interactive_copy/js/interactive_logic.js ../interactive_copy/js/interactive_logic_MD5OUT.js

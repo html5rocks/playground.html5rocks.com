@@ -1,0 +1,17 @@
+#content {
+
+  -webkit-column-count: 2;
+  -webkit-column-rule: 1px solid #bbb;
+  -webkit-column-gap: 2em;
+
+  -moz-column-count: 2;
+  -moz-column-rule: 1px solid #bbb;
+  -moz-column-gap: 2em;
+
+  column-count: 2;
+  column-rule: 1px solid #bbb;
+  column-gap: 2em;
+
+  
+  display: block;
+}

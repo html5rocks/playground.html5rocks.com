@@ -1,0 +1,24 @@
+.centerbox {
+  /* basic styling */
+  width: 350px;
+  height: 95px;
+  font-size: 14px;
+  border: 1px solid #555;
+  background : #CFC;
+
+  /* flexbox, por favor */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+ 
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+  
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+}

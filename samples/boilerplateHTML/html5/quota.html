@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    INSERT_CSS_HERE
+  </style>
+  <style>
+    input, button {
+      font-size: 12px;
+    }
+    span {
+      display: block;
+    }
+  </style>
+  </head>
+  <body>
+    <header>
+      <h1>Quota API</h1><div class="arrow-right"></div>
+      <h2>Showing usage and quota request</h2>
+    </header>  
+    <div id="excerpt">
+      Quota API lets you control the amount of local memory space your application needs. Just two commands will do the job but <a href="http://slides.html5rocks.com/#quota-api">check its limitations</a> and what storage APIs are affected by it.
+    </div>
+    <div id="content">
+      <h3>Default (Temporary)</h3>
+      <div>
+        10% of available disk in total<button id="temp-query">Show Usage</button><span>Used: <output>--</output> Bytes</span><span>Remaining: <output>--</output> Bytes</span>
+      </div>
+
+      <h3>Quota Requested (Persistent)</h3>
+      <div>
+        <input id="requested-quota" type="text" placeholder="Request quota amount..."/> in Bytes <button id="perm-request" style="margin-left: 5px">Request Quota</button><span>Used: <output>--</output> Bytes</span>
+      </div>
+    </div>
+    <p id="log"></p>
+    <script>
+      INSERT_JAVASCRIPT_HERE
+    </script>
+  </body>
+</html>

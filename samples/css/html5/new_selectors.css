@@ -1,0 +1,11 @@
+p { font-size: 20px; }
+
+/* Using attribute selector + pseudo-class + data url in order to mark external links */
+a[href^="http"]:after {
+  content: url(data:image/png;base64,R0lGODlhCQAMAMQAAPr7/Cpdi6q/0X2duURxmjRlkfz9/vz8/TVlkae8z4+qwoWivTlplDVmkvv8/Up1nUVymvn6/LrL2i1gjStejKS6zkNwmUFvmD5slkJwmbjJ2DZnkqm90Cdbiv///wAAACH5BAEAAB4ALAAAAAAJAAwAAAU6oCeOY7R0aNoByWURQUoOMTpqD0p1Ird1hEGGJ/gVJB5Ip9gpcESYDqOD4BxEFcWkwTGMHACSeDwKAQA7);
+  padding-left: 2px;
+}
+
+/*sibling selector support*/
+a + a { color: red; }
+a + a + a { color: green; }

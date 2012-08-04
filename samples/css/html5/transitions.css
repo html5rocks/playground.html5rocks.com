@@ -1,0 +1,17 @@
+#content {
+
+  -webkit-transition: margin-left 1s ease-in-out;
+  -moz-transition: margin-left 1s ease-in-out;
+  -o-transition: margin-left 1s ease-in-out;
+  
+  display: inline;
+  height: 20px;
+  background: red;
+  color: white;
+}
+#content.left {
+  margin-left: 0;
+}
+#content.right {
+  margin-left: 780px;
+}

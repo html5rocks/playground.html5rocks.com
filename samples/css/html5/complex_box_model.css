@@ -1,0 +1,67 @@
+.hbox {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+
+  display: box;
+  box-orient: horizontal;
+
+  width: 500px;
+  height: 100px;
+  background-color: wheat;
+  border: 2px solid peru;
+}
+
+.center_box {
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+
+  -moz-box-align: center;
+  -moz-box-pack: center;
+
+  box-align: center;
+  box-pack: center;
+}
+
+.justified_box {
+  -webkit-box-align: center;
+  -webkit-box-pack: justify;
+
+  -moz-box-align: center;
+  -moz-box-pack: justify;
+
+  box-align: center;
+  box-pack: justify;
+}
+
+.reverse_box {
+  -webkit-box-direction: reverse;
+  -moz-box-direction: reverse;
+  box-direction: reverse;
+}
+
+.child_box {
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  font: 16px/50px Arial;
+  text-align: center;
+}
+
+.box_group_1 {
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  box-ordinal-group: 1;
+}
+
+.box_group_2 {
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  box-ordinal-group: 2;
+}
+
+p {
+  font: 20px Arial;
+}

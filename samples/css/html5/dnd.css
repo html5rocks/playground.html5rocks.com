@@ -1,0 +1,35 @@
+#drag-zone {
+  list-style: none;
+  float: left; 
+}
+#drag-zone li * {
+  border: 4px solid #888;
+  display: block;
+  margin: 10px 0;
+}
+#drag-zone, #drop-zone, #drop-data { 
+  width: 20%;
+}
+#drop-zone, #drop-data {
+  padding: 40px;
+  border: 5px solid #888;
+  float: right;
+  height: 240px;
+  overflow: auto;
+}
+#drop-zone.hovering {
+  border: 5px solid #aaa;
+  background-color: rgba(255, 0, 0, 0.199219);
+}
+#drop-data { 
+  background-color: #eee;
+  font-family: Monospace;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+}
+.datatypes {
+  font-weight: bold;
+}
+.draggable-text {
+  padding: 5px;
+} 

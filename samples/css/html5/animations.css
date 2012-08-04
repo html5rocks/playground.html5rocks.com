@@ -1,0 +1,18 @@
+@-webkit-keyframes pulse {
+  from {
+    opacity: 0.0;
+    font-size: 100%;
+  }
+  to {
+    opacity: 1.0;
+    font-size: 200%;
+  }
+}
+
+div {
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+}

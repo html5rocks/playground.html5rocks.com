@@ -1,0 +1,14 @@
+#tripmeter {
+  border: 3px double black;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+p {
+  color: #222;
+  font: 14px Arial;
+}
+
+span {
+  color: #00C;
+}
