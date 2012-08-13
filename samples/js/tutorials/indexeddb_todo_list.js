@@ -35,7 +35,7 @@ html5rocks.indexedDB.open = function() {
         var store = db.createObjectStore("todo",
           {keyPath: "timeStamp"});
         e.target.transaction.oncomplete = function() {
-            html5rocks.indexedDB.getAllTodoItems();
+          html5rocks.indexedDB.getAllTodoItems();
         };
       };
     } else {
