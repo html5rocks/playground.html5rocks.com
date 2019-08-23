@@ -1,6 +1,6 @@
 var html5rocks = {};
 window.indexedDB = window.indexedDB || window.webkitIndexedDB ||
-                   window.mozIndexedDB;
+                window.mozIndexedDB;
 
 if ('webkitIndexedDB' in window) {
   window.IDBTransaction = window.webkitIDBTransaction;
@@ -15,35 +15,29 @@ html5rocks.indexedDB.onerror = function(e) {
 };
 
 html5rocks.indexedDB.open = function() {
-  var request = indexedDB.open("todos");
+  var version = 1;
+  var request = indexedDB.open("todos", version);
+
+  // We can only create Object stores in a versionchange transaction.
+  request.onupgradeneeded = function(e) {
+    var db = e.target.result;
+
+    // A versionchange transaction is started automatically.
+    e.target.transaction.onerror = html5rocks.indexedDB.onerror;
+
+    if(db.objectStoreNames.contains("todo")) {
+      db.deleteObjectStore("todo");
+    }
+
+    var store = db.createObjectStore("todo",
+      {keyPath: "timeStamp"});
+  };
 
   request.onsuccess = function(e) {
-    var v = 1;
     html5rocks.indexedDB.db = e.target.result;
-    var db = html5rocks.indexedDB.db;
-    // We can only create Object stores in a setVersion transaction;
-    if (v != db.version) {
-      var setVrequest = db.setVersion(v);
-
-      // onsuccess is the only place we can create Object Stores
-      setVrequest.onerror = html5rocks.indexedDB.onerror;
-      setVrequest.onsuccess = function(e) {
-        if(db.objectStoreNames.contains("todo")) {
-          db.deleteObjectStore("todo");
-        }
-
-        var store = db.createObjectStore("todo",
-          {keyPath: "timeStamp"});
-        e.target.transaction.oncomplete = function() {
-          html5rocks.indexedDB.getAllTodoItems();
-        };
-      };
-    } else {
-      request.transaction.oncomplete = function() {
-        html5rocks.indexedDB.getAllTodoItems();
-      };
-    }
+    html5rocks.indexedDB.getAllTodoItems();
   };
+
   request.onerror = html5rocks.indexedDB.onerror;
 };
 
@@ -93,7 +87,8 @@ html5rocks.indexedDB.getAllTodoItems = function() {
   var store = trans.objectStore("todo");
 
   // Get everything in the store;
-  var cursorRequest = store.openCursor();
+  var keyRange = IDBKeyRange.lowerBound(0);
+  var cursorRequest = store.openCursor(keyRange);
 
   cursorRequest.onsuccess = function(e) {
     var result = e.target.result;
