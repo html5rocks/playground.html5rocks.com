@@ -1,136 +1,131 @@
 var html5rocks = {};
 window.indexedDB = window.indexedDB || window.webkitIndexedDB ||
-                   window.mozIndexedDB;
+                window.mozIndexedDB;
 
 if ('webkitIndexedDB' in window) {
-  window.IDBTransaction = window.webkitIDBTransaction;
-  window.IDBKeyRange = window.webkitIDBKeyRange;
+    window.IDBTransaction = window.webkitIDBTransaction;
+    window.IDBKeyRange = window.webkitIDBKeyRange;
 }
 
 html5rocks.indexedDB = {};
 html5rocks.indexedDB.db = null;
 
-html5rocks.indexedDB.onerror = function(e) {
-  console.log(e);
+html5rocks.indexedDB.onerror = function (e) {
+    console.log(e);
 };
 
-html5rocks.indexedDB.open = function() {
-  var request = indexedDB.open("todos");
+html5rocks.indexedDB.open = function () {
+    var version = 1;
+    var request = indexedDB.open("todos", version);
 
-  request.onsuccess = function(e) {
-    var v = 1;
-    html5rocks.indexedDB.db = e.target.result;
-    var db = html5rocks.indexedDB.db;
-    // We can only create Object stores in a setVersion transaction;
-    if (v != db.version) {
-      var setVrequest = db.setVersion(v);
+    // We can only create Object stores in a versionchange transaction.
+    request.onupgradeneeded = function (e) {
+        var db = e.target.result;
 
-      // onsuccess is the only place we can create Object Stores
-      setVrequest.onerror = html5rocks.indexedDB.onerror;
-      setVrequest.onsuccess = function(e) {
-        if(db.objectStoreNames.contains("todo")) {
-          db.deleteObjectStore("todo");
+        // A versionchange transaction is started automatically.
+        e.target.transaction.onerror = html5rocks.indexedDB.onerror;
+
+        if (db.objectStoreNames.contains("todo")) {
+            db.deleteObjectStore("todo");
         }
 
         var store = db.createObjectStore("todo",
-          {keyPath: "timeStamp"});
-        e.target.transaction.oncomplete = function() {
-          html5rocks.indexedDB.getAllTodoItems();
-        };
-      };
-    } else {
-      request.transaction.oncomplete = function() {
+          { keyPath: "timeStamp" });
+    };
+
+    request.onsuccess = function (e) {
+        html5rocks.indexedDB.db = e.target.result;
         html5rocks.indexedDB.getAllTodoItems();
-      };
-    }
-  };
-  request.onerror = html5rocks.indexedDB.onerror;
+    };
+
+    request.onerror = html5rocks.indexedDB.onerror;
 };
 
-html5rocks.indexedDB.addTodo = function(todoText) {
-  var db = html5rocks.indexedDB.db;
-  var trans = db.transaction(["todo"], "readwrite");
-  var store = trans.objectStore("todo");
+html5rocks.indexedDB.addTodo = function (todoText) {
+    var db = html5rocks.indexedDB.db;
+    var trans = db.transaction(["todo"], "readwrite");
+    var store = trans.objectStore("todo");
 
-  var data = {
-    "text": todoText,
-    "timeStamp": new Date().getTime()
-  };
+    var data = {
+        "text": todoText,
+        "timeStamp": new Date().getTime()
+    };
 
-  var request = store.put(data);
+    var request = store.put(data);
 
-  request.onsuccess = function(e) {
-    html5rocks.indexedDB.getAllTodoItems();
-  };
+    trans.oncomplete = function (e) {
+        html5rocks.indexedDB.getAllTodoItems();
+    };
 
-  request.onerror = function(e) {
-    console.log("Error Adding: ", e);
-  };
+    request.onerror = function (e) {
+        console.log("Error Adding: ", e);
+    };
 };
 
-html5rocks.indexedDB.deleteTodo = function(id) {
-  var db = html5rocks.indexedDB.db;
-  var trans = db.transaction(["todo"], "readwrite");
-  var store = trans.objectStore("todo");
+html5rocks.indexedDB.deleteTodo = function (id) {
+    var db = html5rocks.indexedDB.db;
+    var trans = db.transaction(["todo"], "readwrite");
+    var store = trans.objectStore("todo");
 
-  var request = store.delete(id);
+    var request = store.delete(id);
 
-  request.onsuccess = function(e) {
-    html5rocks.indexedDB.getAllTodoItems();
-  };
+    trans.oncomplete = function (e) {
+        html5rocks.indexedDB.getAllTodoItems();
+    };
 
-  request.onerror = function(e) {
-    console.log("Error Adding: ", e);
-  };
+    request.onerror = function (e) {
+        console.log("Error Adding: ", e);
+    };
 };
 
-html5rocks.indexedDB.getAllTodoItems = function() {
-  var todos = document.getElementById("todoItems");
-  todos.innerHTML = "";
+html5rocks.indexedDB.getAllTodoItems = function () {
+    var todos = document.getElementById("todoItems");
+    todos.innerHTML = "";
 
-  var db = html5rocks.indexedDB.db;
-  var trans = db.transaction(["todo"], "readwrite");
-  var store = trans.objectStore("todo");
+    var db = html5rocks.indexedDB.db;
+    var trans = db.transaction(["todo"], "readwrite");
+    var store = trans.objectStore("todo");
 
-  // Get everything in the store;
-  var cursorRequest = store.openCursor();
+    // Get everything in the store;
+    var keyRange = IDBKeyRange.lowerBound(0);
+    var cursorRequest = store.openCursor(keyRange);
 
-  cursorRequest.onsuccess = function(e) {
-    var result = e.target.result;
-    if(!!result == false)
-      return;
+    cursorRequest.onsuccess = function (e) {
+        var result = e.target.result;
+        if (!!result == false)
+            return;
 
-    renderTodo(result.value);
-    result.continue();
-  };
+        renderTodo(result.value);
+        result.continue();
+    };
 
-  cursorRequest.onerror = html5rocks.indexedDB.onerror;
+    cursorRequest.onerror = html5rocks.indexedDB.onerror;
 };
 
 function renderTodo(row) {
-  var todos = document.getElementById("todoItems");
-  var li = document.createElement("li");
-  var a = document.createElement("a");
-  var t = document.createTextNode(row.text);
+    var todos = document.getElementById("todoItems");
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    var t = document.createTextNode(row.text);
 
-  a.addEventListener("click", function() {
-    html5rocks.indexedDB.deleteTodo(row.timeStamp);
-  }, false);
+    a.addEventListener("click", function () {
+        html5rocks.indexedDB.deleteTodo(row.timeStamp);
+    }, false);
 
-  a.textContent = " [Delete]";
-  li.appendChild(t);
-  li.appendChild(a);
-  todos.appendChild(li);
+    a.href = "#";
+    a.textContent = " [Delete]";
+    li.appendChild(t);
+    li.appendChild(a);
+    todos.appendChild(li);
 }
 
 function addTodo() {
-  var todo = document.getElementById("todo");
-  html5rocks.indexedDB.addTodo(todo.value);
-  todo.value = "";
+    var todo = document.getElementById("todo");
+    html5rocks.indexedDB.addTodo(todo.value);
+    todo.value = "";
 }
 
 function init() {
-  html5rocks.indexedDB.open();
+    html5rocks.indexedDB.open();
 }
-
 window.addEventListener("DOMContentLoaded", init, false);
